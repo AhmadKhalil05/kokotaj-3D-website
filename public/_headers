@@ -1,0 +1,5 @@
+/assets/desktop/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/mobile/*
+  Cache-Control: public, max-age=31536000, immutable
