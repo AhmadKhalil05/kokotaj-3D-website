@@ -672,29 +672,39 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (Mobile & Tablet Hardened)
+   RESPONSIVE UTILITIES & MOBILE HARDENING
    ========================================================================== */
+.show-on-mobile {
+  display: none !important;
+}
+
 @media (max-width: 900px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  .show-on-mobile {
+    display: inline !important;
+  }
+
   .header-nav-white {
-    display: none;
+    display: none !important;
   }
   
+  /* 1. Sleek, Uncluttered Mobile Header */
   .site-header-transparent {
-    height: 64px;
+    height: 56px;
+    padding-top: max(env(safe-area-inset-top), 0.25rem);
     z-index: 200;
   }
 
   .header-inner-transparent {
-    padding: 0 1.25rem;
+    padding: 0 1rem;
   }
 
   .brand-logo-text {
     font-size: 1.15rem;
-  }
-
-  .brand-sub-white {
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.06em;
   }
 
   .header-action-white {
@@ -704,14 +714,17 @@ body {
     z-index: 210;
   }
 
-  .header-action-white .btn-white-outline {
-    padding: 0.45rem 0.95rem;
-    font-size: 0.7rem;
+  .header-action-white .header-btn-inquire {
+    padding: 0.38rem 0.85rem;
+    font-size: 0.68rem;
+    font-weight: 700;
     letter-spacing: 0.08em;
-    min-height: 38px;
+    min-height: 32px;
+    border-radius: 999px;
     pointer-events: auto;
   }
 
+  /* 2. Uncluttered Bottom Layout with Safe Space */
   .pos-top-left,
   .pos-bottom-right,
   .pos-top-right,
@@ -719,7 +732,7 @@ body {
   .pos-bottom-center {
     position: absolute;
     top: auto;
-    bottom: 6vh;
+    bottom: max(env(safe-area-inset-bottom), 1.5rem);
     left: 1.25rem;
     right: 1.25rem;
     width: auto;
@@ -739,82 +752,118 @@ body {
     pointer-events: auto;
   }
 
+  .editorial-number {
+    font-size: clamp(1.8rem, 6vw, 2.4rem) !important;
+    margin-bottom: 0.15rem;
+    line-height: 1;
+  }
+
+  .editorial-tag {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.25rem;
+  }
+
+  .editorial-title {
+    font-size: clamp(1.45rem, 5.8vw, 1.95rem) !important;
+    line-height: 1.05;
+    margin-bottom: 0.25rem;
+  }
+
+  .giant-metric-row {
+    margin-bottom: 0.25rem;
+  }
+
+  .giant-metric-val {
+    font-size: clamp(2.8rem, 9vw, 3.8rem) !important;
+    line-height: 0.9;
+  }
+
+  .giant-metric-unit {
+    font-size: clamp(1.1rem, 3.5vw, 1.4rem) !important;
+  }
+
+  .editorial-subtitle {
+    font-size: clamp(0.72rem, 2.5vw, 0.85rem) !important;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.35rem;
+  }
+
+  .editorial-desc {
+    font-size: 0.78rem !important;
+    line-height: 1.4;
+    margin-bottom: 0.65rem;
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .editorial-badges {
+    gap: 0.4rem;
+  }
+
   .editorial-badges.justify-right {
     justify-content: flex-start;
+  }
+
+  .badge-white {
+    padding: 0.28rem 0.65rem;
+    font-size: 0.62rem;
   }
 
   .metrics-pill-grid {
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 0.45rem;
-    margin-top: 0.4rem;
+    gap: 0.4rem;
+    margin-top: 0.35rem;
   }
 
   .mini-metric-pill {
-    padding: 0.35rem 0.75rem;
+    padding: 0.3rem 0.65rem;
     text-align: left;
+    border-radius: 8px;
   }
 
   .mini-metric-pill strong {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .mini-metric-pill span {
-    font-size: 0.6rem;
+    font-size: 0.58rem;
   }
 
-  .editorial-number {
-    font-size: clamp(2.2rem, 8vw, 3.2rem) !important;
-    margin-bottom: 0.2rem;
-  }
-
-  .editorial-title {
-    font-size: clamp(1.7rem, 6.5vw, 2.4rem) !important;
-    line-height: 1.05;
-    margin-bottom: 0.35rem;
-  }
-
-  .editorial-subtitle {
-    font-size: clamp(0.75rem, 2.6vw, 0.9rem) !important;
-    margin-bottom: 0.5rem;
-  }
-
-  .editorial-desc {
-    font-size: 0.82rem !important;
-    line-height: 1.45;
-    margin-bottom: 0.85rem;
-    max-width: 100%;
-  }
-
-  .badge-white {
-    padding: 0.3rem 0.7rem;
+  .scroll-invite-text {
     font-size: 0.65rem;
+    margin-top: 0.5rem;
   }
 
+  /* 3. Action Buttons on Mobile */
   .editorial-action-row {
     width: 100%;
     justify-content: flex-start;
-    gap: 0.6rem;
+    gap: 0.5rem;
     margin-top: 0.25rem;
   }
 
-  .editorial-action-row .btn-white-filled,
-  .editorial-action-row .btn-white-outline {
-    padding: 0.55rem 1rem;
-    font-size: 0.68rem;
-    flex: 1 1 auto;
+  .editorial-action-row .btn-white-filled {
+    padding: 0.6rem 1.1rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 100%;
     text-align: center;
     justify-content: center;
+    border-radius: 999px;
   }
 
+  .editorial-action-row .btn-white-outline {
+    display: none !important;
+  }
+
+  /* 4. Hide Bottom HUD on Mobile to prevent UI collisions */
   .minimal-hud-bottom {
-    bottom: 1.25rem;
-    font-size: 0.68rem;
-    gap: 0.6rem;
-  }
-
-  .hud-progress-track {
-    width: 60px;
+    display: none !important;
   }
 
   .modal-card {

@@ -45,8 +45,8 @@ export function Header({ onOpenContact }: HeaderProps) {
           className="brand-link-white header-anim-item"
         >
           <span className="brand-logo-text">KOKOTAJ</span>
-          <span className="brand-dot-white" />
-          <span className="brand-sub-white">VIETNAM</span>
+          <span className="brand-dot-white hide-on-mobile" />
+          <span className="brand-sub-white hide-on-mobile">VIETNAM</span>
         </a>
 
         {/* Minimalist White Nav Links */}
@@ -72,10 +72,11 @@ export function Header({ onOpenContact }: HeaderProps) {
         <div className="header-action-white header-anim-item">
           <button 
             type="button" 
-            className="btn-white-outline"
+            className="btn-white-outline header-btn-inquire"
             onClick={onOpenContact}
           >
-            INQUIRE EXPORT
+            <span className="hide-on-mobile">INQUIRE EXPORT</span>
+            <span className="show-on-mobile">INQUIRE</span>
           </button>
         </div>
       </div>
