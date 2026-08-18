@@ -27,55 +27,33 @@ export function ScrollyStory({ onOpenContact }: ScrollyStoryProps) {
     if (!items.length) return;
 
     // Horizontal direction based on corner:
-    // Left corners (0, 3) slide in horizontally from left (x: -90)
-    // Right corners (1, 2) slide in horizontally from right (x: 90)
-    // Center (4) expands horizontally with letter-spacing & scale
+    // Left corners (0, 3) slide in horizontally from left (x: -50)
+    // Right corners (1, 2, 4) slide in horizontally from right (x: 50)
     let startX = 0;
     if (index === 0 || index === 3) {
-      startX = -90;
-    } else if (index === 1 || index === 2) {
-      startX = 90;
+      startX = -50;
+    } else {
+      startX = 50;
     }
 
     gsap.killTweensOf(items);
 
-    if (index === 4) {
-      gsap.fromTo(
-        items,
-        {
-          opacity: 0,
-          scaleX: 0.9,
-          x: 0,
-          filter: 'blur(10px)',
-        },
-        {
-          opacity: 1,
-          scaleX: 1,
-          x: 0,
-          filter: 'blur(0px)',
-          duration: 0.75,
-          stagger: 0.08,
-          ease: 'power3.out',
-        }
-      );
-    } else {
-      gsap.fromTo(
-        items,
-        {
-          opacity: 0,
-          x: startX,
-          filter: 'blur(12px)',
-        },
-        {
-          opacity: 1,
-          x: 0,
-          filter: 'blur(0px)',
-          duration: 0.8,
-          stagger: 0.09,
-          ease: 'power3.out',
-        }
-      );
-    }
+    gsap.fromTo(
+      items,
+      {
+        opacity: 0,
+        x: startX,
+        filter: 'blur(8px)',
+      },
+      {
+        opacity: 1,
+        x: 0,
+        filter: 'blur(0px)',
+        duration: 0.9,
+        stagger: 0.08,
+        ease: 'power3.out',
+      }
+    );
   };
 
   // Helper to trigger horizontal exit animation with GSAP
@@ -88,28 +66,28 @@ export function ScrollyStory({ onOpenContact }: ScrollyStoryProps) {
 
     let exitX = 0;
     if (index === 0 || index === 3) {
-      exitX = -60;
-    } else if (index === 1 || index === 2) {
-      exitX = 60;
+      exitX = -40;
+    } else {
+      exitX = 40;
     }
 
     gsap.killTweensOf(items);
     gsap.to(items, {
       opacity: 0,
       x: exitX,
-      filter: 'blur(8px)',
+      filter: 'blur(6px)',
       duration: 0.35,
       stagger: 0.03,
       ease: 'power2.in',
     });
   };
 
-  // 1. Initial Load Horizontal Entrance (Phase 0: Top-Left from -90px)
+  // 1. Initial Load Synchronized Entrance with Canvas
   useEffect(() => {
     const timer = setTimeout(() => {
       prevPhaseRef.current = 0;
       animatePhaseIn(0);
-    }, 250);
+    }, 120);
 
     return () => clearTimeout(timer);
   }, []);
@@ -309,14 +287,14 @@ export function ScrollyStory({ onOpenContact }: ScrollyStoryProps) {
         </div>
 
         {/* =========================================================
-            PHASE 4: 360° LUXURY EXPORT & TRADE (CORNER: BOTTOM-CENTER)
-            Horizontal Expansion GSAP Entrance (scaleX, letter-spacing)
+            PHASE 4: 360° LUXURY EXPORT & TRADE (CORNER: BOTTOM-RIGHT)
+            Horizontal GSAP Entrance from Right (x: 90 -> 0)
            ========================================================= */}
         <div 
           ref={phase4Ref} 
-          className={`corner-section pos-bottom-center ${currentPhase === 4 ? 'is-active' : ''}`}
+          className={`corner-section pos-bottom-right ${currentPhase === 4 ? 'is-active' : ''}`}
         >
-          <div className="corner-card align-center">
+          <div className="corner-card align-right">
             <span className="editorial-number gsap-item">05</span>
             <div className="editorial-tag gsap-item">
               WORLDWIDE EXPORT LOGISTICS
@@ -327,7 +305,7 @@ export function ScrollyStory({ onOpenContact }: ScrollyStoryProps) {
             <h3 className="editorial-subtitle gsap-item">
               GERMANY (HQ) • SAUDI ARABIA • VIETNAM
             </h3>
-            <p className="editorial-desc gsap-item" style={{ maxWidth: '580px', margin: '0 auto 1.5rem auto' }}>
+            <p className="editorial-desc gsap-item">
               Supplying premier Michelin restaurants, luxury hotels, gourmet organic supermarkets, and beverage distributors worldwide with refrigerated container shipments.
             </p>
             <div className="editorial-action-row gsap-item">

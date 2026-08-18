@@ -310,12 +310,44 @@ body {
 
 .pos-bottom-center {
   top: auto;
-  bottom: 8vh;
+  bottom: 5vh;
   left: 50%;
   right: auto;
   width: 90%;
-  max-width: 700px;
+  max-width: 680px;
   transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.pos-bottom-center .corner-card {
+  pointer-events: none;
+}
+
+.pos-bottom-center .editorial-number {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  margin-bottom: 0.2rem;
+}
+
+.pos-bottom-center .editorial-title {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin-bottom: 0.25rem;
+}
+
+.pos-bottom-center .editorial-subtitle {
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  margin-bottom: 0.5rem;
+}
+
+.pos-bottom-center .editorial-desc {
+  font-size: clamp(0.8rem, 0.95vw, 0.9rem);
+  margin-bottom: 0.85rem;
+  line-height: 1.45;
+}
+
+.pos-bottom-center .lens-reveal-pill,
+.pos-bottom-center .editorial-action-row button,
+.pos-bottom-center .editorial-action-row a {
+  pointer-events: auto;
 }
 
 /* Corner Card Content */
