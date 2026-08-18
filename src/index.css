@@ -222,12 +222,16 @@ body {
   z-index: 0;
   pointer-events: none;
   background: #08090b;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .canvas-viewport-fixed canvas {
   width: 100%;
   height: 100%;
   display: block;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* ==========================================================================
@@ -256,6 +260,7 @@ body {
   overflow: hidden;
   pointer-events: none;
   z-index: 20;
+  transform: translateZ(0);
 }
 
 /* ==========================================================================
@@ -267,6 +272,9 @@ body {
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
+  transform: translateZ(0);
+  will-change: opacity, transform, filter;
+  backface-visibility: hidden;
 }
 
 .corner-section.is-active {
@@ -664,32 +672,158 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN (Mobile & Tablet Hardened)
    ========================================================================== */
 @media (max-width: 900px) {
   .header-nav-white {
     display: none;
   }
+  
+  .site-header-transparent {
+    height: 64px;
+    z-index: 200;
+  }
+
+  .header-inner-transparent {
+    padding: 0 1.25rem;
+  }
+
+  .brand-logo-text {
+    font-size: 1.15rem;
+  }
+
+  .brand-sub-white {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+  }
+
+  .header-action-white {
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+    z-index: 210;
+  }
+
+  .header-action-white .btn-white-outline {
+    padding: 0.45rem 0.95rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    min-height: 38px;
+    pointer-events: auto;
+  }
+
   .pos-top-left,
   .pos-bottom-right,
   .pos-top-right,
-  .pos-bottom-left {
+  .pos-bottom-left,
+  .pos-bottom-center {
     position: absolute;
     top: auto;
-    bottom: 10vh;
-    left: 5vw;
-    right: 5vw;
-    max-width: 100%;
+    bottom: 6vh;
+    left: 1.25rem;
+    right: 1.25rem;
+    width: auto;
+    max-width: calc(100vw - 2.5rem);
+    transform: none;
     text-align: left;
+    pointer-events: none;
   }
-  .corner-card.align-right {
+
+  .pos-top-left .corner-card,
+  .pos-bottom-right .corner-card,
+  .pos-top-right .corner-card,
+  .pos-bottom-left .corner-card,
+  .pos-bottom-center .corner-card {
     align-items: flex-start;
     text-align: left;
+    pointer-events: auto;
   }
+
   .editorial-badges.justify-right {
     justify-content: flex-start;
   }
+
   .metrics-pill-grid {
     justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.4rem;
+  }
+
+  .mini-metric-pill {
+    padding: 0.35rem 0.75rem;
+    text-align: left;
+  }
+
+  .mini-metric-pill strong {
+    font-size: 0.95rem;
+  }
+
+  .mini-metric-pill span {
+    font-size: 0.6rem;
+  }
+
+  .editorial-number {
+    font-size: clamp(2.2rem, 8vw, 3.2rem) !important;
+    margin-bottom: 0.2rem;
+  }
+
+  .editorial-title {
+    font-size: clamp(1.7rem, 6.5vw, 2.4rem) !important;
+    line-height: 1.05;
+    margin-bottom: 0.35rem;
+  }
+
+  .editorial-subtitle {
+    font-size: clamp(0.75rem, 2.6vw, 0.9rem) !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .editorial-desc {
+    font-size: 0.82rem !important;
+    line-height: 1.45;
+    margin-bottom: 0.85rem;
+    max-width: 100%;
+  }
+
+  .badge-white {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.65rem;
+  }
+
+  .editorial-action-row {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    margin-top: 0.25rem;
+  }
+
+  .editorial-action-row .btn-white-filled,
+  .editorial-action-row .btn-white-outline {
+    padding: 0.55rem 1rem;
+    font-size: 0.68rem;
+    flex: 1 1 auto;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .minimal-hud-bottom {
+    bottom: 1.25rem;
+    font-size: 0.68rem;
+    gap: 0.6rem;
+  }
+
+  .hud-progress-track {
+    width: 60px;
+  }
+
+  .modal-card {
+    padding: 1.75rem 1.25rem;
+    max-width: 94vw;
+    border-radius: 16px;
+  }
+
+  .modal-title {
+    font-size: 1.35rem;
   }
 }

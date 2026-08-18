@@ -11,15 +11,18 @@ export function useSmoothScroll(enabled: boolean = true) {
   useEffect(() => {
     if (!enabled) return;
 
-    // Initialize Lenis with luxury deceleration curve
+    const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
+    // Initialize Lenis with mobile-friendly touch configuration
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: isTouchDevice ? 1.0 : 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      touchMultiplier: 1,
+      syncTouch: true,
     });
 
     lenisRef.current = lenis;

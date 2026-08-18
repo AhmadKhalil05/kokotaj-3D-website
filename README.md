@@ -322,4 +322,4 @@ The `scrollProgress` value is essentially your **timeline controller** — the s
 
 ## 📦 Repository
 
-GitHub: [github.com/yahyazawadi/koko](https://github.com/yahyazawadi/koko)
+GitHub: [https://github.com/AhmadKhalil05/kokotaj-3D-website](https://github.com/AhmadKhalil05/kokotaj-3D-website)

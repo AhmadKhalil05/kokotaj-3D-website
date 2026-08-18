@@ -92,9 +92,9 @@ export function ScrollyStory({ onOpenContact }: ScrollyStoryProps) {
     return () => clearTimeout(timer);
   }, []);
 
-  // 2. Real-time 60fps Scroll Progress & Horizontal Phase Switching
+  // 2. High-Performance Passive Scroll Progress & Phase Switching (0 Idle CPU)
   useEffect(() => {
-    let animId: number;
+    let ticking = false;
 
     const checkScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop || window.pageYOffset || 0;
@@ -104,11 +104,6 @@ export function ScrollyStory({ onOpenContact }: ScrollyStoryProps) {
       setScrollPercent(Math.round(progress * 100));
 
       // 5 Discrete Phase Ranges:
-      // Phase 0: 0% - 19% (Top-Left)
-      // Phase 1: 19% - 39% (Bottom-Right)
-      // Phase 2: 39% - 59% (Top-Right)
-      // Phase 3: 59% - 79% (Bottom-Left)
-      // Phase 4: 79% - 100% (Bottom-Center)
       let targetPhase = 0;
       if (progress < 0.19) {
         targetPhase = 0;
@@ -135,13 +130,21 @@ export function ScrollyStory({ onOpenContact }: ScrollyStoryProps) {
         setCurrentPhase(targetPhase);
       }
 
-      animId = requestAnimationFrame(checkScroll);
+      ticking = false;
     };
 
-    animId = requestAnimationFrame(checkScroll);
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(checkScroll);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    checkScroll();
 
     return () => {
-      cancelAnimationFrame(animId);
+      window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
