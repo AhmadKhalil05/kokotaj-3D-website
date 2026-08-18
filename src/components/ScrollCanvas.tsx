@@ -178,7 +178,7 @@ export function ScrollCanvas({
     lensRef.current.lastSmoothX = initialWidth / 2;
     lensRef.current.lastSmoothY = initialHeight / 2;
 
-    // Fast Aspect-Fit Cover Drawer with mobile zoom-out adjustment
+    // 100% True Full-Bleed Cover Drawer (Full Screen, Zero Black Bars)
     const drawImageCover = (
       context: CanvasRenderingContext2D,
       img: HTMLImageElement,
@@ -200,18 +200,8 @@ export function ScrollCanvas({
         sy = (img.height - sh) / 2;
       }
 
-      const isMobile = cw < 768;
-      if (!isMobile) {
-        context.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
-      } else {
-        // Subtle comfortable zoom-out on mobile so the full coconut breathes nicely
-        const zoomOutScale = 0.82;
-        const destW = cw * zoomOutScale;
-        const destH = ch * zoomOutScale;
-        const destX = (cw - destW) / 2;
-        const destY = (ch - destH) / 2 - ch * 0.035; // Sits comfortably in upper half
-        context.drawImage(img, sx, sy, sw, sh, destX, destY, destW, destH);
-      }
+      // 100% Full-bleed edge-to-edge fill
+      context.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
     };
 
     const resizeCanvas = () => {
